@@ -36,5 +36,8 @@ jspm_packages
 # Mac OS X DS_Store
 .DS_Store
 
-# The lib folder
-lib
+# Others
+test
+src
+.babelrc
+.gitignore
