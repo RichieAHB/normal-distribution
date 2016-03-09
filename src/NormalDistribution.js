@@ -82,7 +82,7 @@ export default class NormalDistribution {
     const zTable = NormalDistribution.zTable;
     const absZScore = Math.abs(zScore);
     const zRow = Math.floor(absZScore * 10) / 10;
-    const zCol = this._round(absZScore % (zRow + 0.1), 2);
+    const zCol = this._round(Math.round(absZScore * 100) % 10 / 100, 2);
     const zColIndex = zTable.z.indexOf(zCol);
     const absPercentile = zTable[zRow.toString()][zColIndex];
 
@@ -153,6 +153,6 @@ export default class NormalDistribution {
    */
   _round(value, decimalPlaces) {
     const factor = Math.pow(10, decimalPlaces);
-    return Math.round(value * 100) / 100;
+    return Math.round(value * factor) / factor;
   }
 }
