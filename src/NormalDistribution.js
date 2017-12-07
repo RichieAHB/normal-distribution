@@ -1,5 +1,4 @@
 export default class NormalDistribution {
-
   /**
    * The constructor, assumes a standardized normal distribution if
    *   there are no parameters given
@@ -57,7 +56,11 @@ export default class NormalDistribution {
    * @return {number} the probability
    */
   pdf(value) {
-    const dividend = Math.pow(Math.E, -Math.pow(value - this.mean, 2) / (2 * Math.pow(this.standardDeviation, 2)));
+    const dividend = Math.pow(
+      Math.E,
+      -Math.pow(value - this.mean, 2) /
+        (2 * Math.pow(this.standardDeviation, 2))
+    );
     const divisor = this.standardDeviation * Math.sqrt(2 * Math.PI);
     return dividend / divisor;
   }
@@ -82,7 +85,7 @@ export default class NormalDistribution {
     const zTable = NormalDistribution.zTable;
     const absZScore = Math.abs(zScore);
     const zRow = Math.floor(absZScore * 10) / 10;
-    const zCol = this._round(Math.round(absZScore * 100) % 10 / 100, 2);
+    const zCol = this._round((Math.round(absZScore * 100) % 10) / 100, 2);
     const zColIndex = zTable.z.indexOf(zCol);
     const absPercentile = zTable[zRow.toString()][zColIndex];
 
@@ -104,6 +107,8 @@ export default class NormalDistribution {
    * Returns an object representing the standardized z-table
    * @return {Object} the zTable
    */
+
+  // prettier-ignore
   static get zTable() {
     return {
       "z"  :  [0     , 0.01  , 0.02  , 0.03  , 0.04,   0.05  , 0.06  , 0.07  , 0.08  , 0.09  ],
