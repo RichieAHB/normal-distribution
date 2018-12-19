@@ -1,8 +1,10 @@
 {
   "name": "normal-distribution",
   "version": "0.0.6",
-  "description": "A small javascript module for working with normal distributions",
+  "description":
+    "A small javascript module for working with normal distributions",
   "main": "lib/NormalDistribution.js",
+  "licenses": [{ "license": "ISC" }],
   "scripts": {
     "build": "$(yarn bin)/babel src -d lib",
     "test": "mocha --compilers js:@babel/register",
