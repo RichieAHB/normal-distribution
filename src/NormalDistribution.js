@@ -1,3 +1,15 @@
+/**
+ * Rounds a value to a specified amount of decimal places
+ * @param {number} value - the value to be rounded
+ * @param {number} decimalPlaces - the amount of decimal places to round to
+ * @return {number} the rounded number
+ */
+
+const round = (value, decimalPlaces) => {
+  const factor = Math.pow(10, decimalPlaces);
+  return Math.round(value * factor) / factor;
+};
+
 export default class NormalDistribution {
   /**
    * The constructor, assumes a standardized normal distribution if
@@ -6,40 +18,8 @@ export default class NormalDistribution {
    * @param {number} [standardDeviation=1] - the standard deviation
    */
   constructor(mean = 0, standardDeviation = 1) {
-    this._mean = mean;
-    this._standardDeviation = standardDeviation;
-  }
-
-  /**
-   * Getter for the mean average of the distribution
-   * @type {number}
-   */
-  get mean() {
-    return this._mean;
-  }
-
-  /**
-   * Getter for the standard deviation of the distribution
-   * @type {number}
-   */
-  get standardDeviation() {
-    return this._standardDeviation;
-  }
-
-  /**
-   * Setter for the mean average of the distribution
-   * @type {number}
-   */
-  set mean(mean) {
-    this._mean = mean;
-  }
-
-  /**
-   * Setter for the standard deviation of the distribution
-   * @type {number}
-   */
-  set standardDeviation(standardDeviation) {
-    this._standardDeviation = standardDeviation;
+    this.mean = mean;
+    this.standardDeviation = standardDeviation;
   }
 
   /**
@@ -56,11 +36,8 @@ export default class NormalDistribution {
    * @return {number} the probability
    */
   pdf(value) {
-    const dividend = Math.pow(
-      Math.E,
-      -Math.pow(value - this.mean, 2) /
-        (2 * Math.pow(this.standardDeviation, 2))
-    );
+    const dividend =
+      Math.E ** -((value - this.mean) ** 2 / (2 * this.standardDeviation ** 2));
     const divisor = this.standardDeviation * Math.sqrt(2 * Math.PI);
     return dividend / divisor;
   }
@@ -72,7 +49,7 @@ export default class NormalDistribution {
    */
   cdf(value) {
     let zScore = this.zScore(value);
-    zScore = this._round(zScore, 2);
+    zScore = round(zScore, 2);
 
     if (zScore === 0) {
       return 0.5;
@@ -85,7 +62,7 @@ export default class NormalDistribution {
     const zTable = NormalDistribution.zTable;
     const absZScore = Math.abs(zScore);
     const zRow = Math.floor(absZScore * 10) / 10;
-    const zCol = this._round((Math.round(absZScore * 100) % 10) / 100, 2);
+    const zCol = round((Math.round(absZScore * 100) % 10) / 100, 2);
     const zColIndex = zTable.z.indexOf(zCol);
     const absPercentile = zTable[zRow.toString()][zColIndex];
 
@@ -148,16 +125,5 @@ export default class NormalDistribution {
       "3.3":  [0.9995, 0.9995, 0.9995, 0.9996, 0.9996, 0.9996, 0.9996, 0.9996, 0.9996, 0.9997],
       "3.4":  [0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9998]
     }
-  }
-
-  /**
-   * Rounds a value to a specified amount of decimal places
-   * @param {number} value - the value to be rounded
-   * @param {number} decimalPlaces - the amount of decimal places to round to
-   * @return {number} the rounded number
-   */
-  _round(value, decimalPlaces) {
-    const factor = Math.pow(10, decimalPlaces);
-    return Math.round(value * factor) / factor;
   }
 }
