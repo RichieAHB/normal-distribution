@@ -25,14 +25,14 @@ describe("NormalDistribution", () => {
       expect(nd.pdf(0)).to.equal(0.3989422804014327);
     });
 
-    it("should return 0.00013383022576488542 for a z-score of -4", () => {
+    it("should return 0.00013383022576488545 for a z-score of -4", () => {
       const nd = new NormalDistribution();
-      expect(nd.pdf(-4)).to.equal(0.00013383022576488542);
+      expect(nd.pdf(-4)).to.equal(0.00013383022576488545);
     });
 
     it("should return 0.00013383022576488542 for a z-score of 4", () => {
       const nd = new NormalDistribution();
-      expect(nd.pdf(4)).to.equal(0.00013383022576488542);
+      expect(nd.pdf(4)).to.equal(0.00013383022576488545);
     });
   });
 
