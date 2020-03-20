@@ -5,12 +5,15 @@
  * @return {number} the rounded number
  */
 
-const round = (value, decimalPlaces) => {
+const round = (value: number, decimalPlaces: number) => {
   const factor = Math.pow(10, decimalPlaces);
   return Math.round(value * factor) / factor;
 };
 
 export default class NormalDistribution {
+  public mean: number;
+  public standardDeviation: number;
+
   /**
    * The constructor, assumes a standardized normal distribution if
    *   there are no parameters given
@@ -26,7 +29,7 @@ export default class NormalDistribution {
    * @param {number} value - the number to convert to a z-score
    * @return {number} the z-score of the value
    */
-  zScore(value) {
+  zScore(value: number) {
     return (value - this.mean) / this.standardDeviation;
   }
 
@@ -35,7 +38,7 @@ export default class NormalDistribution {
    * @param {number} value - the value to evaluate
    * @return {number} the probability
    */
-  pdf(value) {
+  pdf(value: number) {
     const dividend =
       Math.E ** -((value - this.mean) ** 2 / (2 * this.standardDeviation ** 2));
     const divisor = this.standardDeviation * Math.sqrt(2 * Math.PI);
@@ -47,7 +50,7 @@ export default class NormalDistribution {
    * @param {number} value - the value to evaluate
    * @return {number} the cumulative total
    */
-  cdf(value) {
+  cdf(value: number) {
     let zScore = this.zScore(value);
     zScore = round(zScore, 2);
 
@@ -64,7 +67,7 @@ export default class NormalDistribution {
     const zRow = Math.floor(absZScore * 10) / 10;
     const zCol = round((Math.round(absZScore * 100) % 10) / 100, 2);
     const zColIndex = zTable.z.indexOf(zCol);
-    const absPercentile = zTable[zRow.toString()][zColIndex];
+    const absPercentile = zTable[zRow][zColIndex];
 
     return zScore < 0 ? 1 - absPercentile : absPercentile;
   }
@@ -76,7 +79,7 @@ export default class NormalDistribution {
    * @param {number} value2 - the second boundary
    * @return {number} the probability
    */
-  probabilityBetween(value1, value2) {
+  probabilityBetween(value1: number, value2: number) {
     return Math.abs(this.cdf(value1) - this.cdf(value2));
   }
 
@@ -86,7 +89,7 @@ export default class NormalDistribution {
    */
 
   // prettier-ignore
-  static get zTable() {
+  static get zTable(): { [key: string]: number[] }  {
     return {
       "z"  :  [0     , 0.01  , 0.02  , 0.03  , 0.04,   0.05  , 0.06  , 0.07  , 0.08  , 0.09  ],
       "0"  :  [0.5000, 0.5040, 0.5080, 0.5120, 0.5160, 0.5199, 0.5239, 0.5279, 0.5319, 0.5359],
