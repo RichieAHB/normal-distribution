@@ -38,6 +38,7 @@
     "typescript": "^4.3.5"
   },
   "files": [
-    "lib/NormalDistribution.js"
+    "lib/NormalDistribution.js",
+    "lib/NormalDistribution.d.ts"
   ]
 }
