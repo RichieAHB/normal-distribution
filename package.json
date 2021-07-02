@@ -1,6 +1,6 @@
 {
   "name": "normal-distribution",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "A small javascript module for working with normal distributions",
   "main": "lib/NormalDistribution.js",
   "licenses": [
