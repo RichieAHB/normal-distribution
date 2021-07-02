@@ -64,5 +64,5 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "skipLibCheck": true // fixes an issue with jest types
   },
-  "exclude": ["**/__tests__/**"]
+  "exclude": ["**/__tests__/**", "./lib/**"]
 }
