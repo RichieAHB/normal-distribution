@@ -3,16 +3,12 @@
   "version": "1.1.0",
   "description": "A small javascript module for working with normal distributions",
   "main": "lib/NormalDistribution.js",
-  "licenses": [
-    {
-      "license": "ISC"
-    }
-  ],
+  "types": "lib/NormalDistribution.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "prepublish": "yarn test && yarn build",
-    "format": "prettier --write '{src,test}/**/*.ts'"
+    "prepublishOnly": "yarn test && yarn build",
+    "format": "prettier --write 'src/**/*.ts'"
   },
   "keywords": [
     "javascript",
@@ -30,15 +26,19 @@
     "type": "git",
     "url": "https://github.com/RichieAHB/normal-distribution"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
-    "@types/jest": "^26.0.23",
-    "jest": "^27.0.6",
-    "prettier": "^2.3.2",
-    "ts-jest": "^27.0.3",
-    "typescript": "^4.3.5"
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "prettier": "^3.4.2",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
   },
   "files": [
     "lib/NormalDistribution.js",
-    "lib/NormalDistribution.d.ts"
+    "lib/NormalDistribution.d.ts",
+    "lib/NormalDistribution.d.ts.map"
   ]
 }
